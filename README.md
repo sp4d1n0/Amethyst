@@ -117,6 +117,9 @@ Feel free to fork master and open a PR.
 
 I will add issues where I think you could start from and label them as help wanted.
 
+## Credits
+
+A big credit goes to [ianyh/Amethyst](https://ianyh.com/amethyst/). This is simply its port on the windows 10 operating system.
 
 I got ideas and code snippets from the following projects:
 - [MScholtes/VirtualDesktop](https://github.com/MScholtes/VirtualDesktop);

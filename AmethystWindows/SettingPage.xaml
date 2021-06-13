@@ -1,0 +1,147 @@
+﻿<Page
+    x:Class="AmethystWindows.SettingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AmethystWindows"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:viewmodels="using:AmethystWindows.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <controls:DockPanel LastChildFill="True">
+        <CommandBar controls:DockPanel.Dock="Top">
+            <local:AppBarLockableToggleButton LockToggle="True" x:Name="ApplicationsBarButton" Icon="List" Label="Home"/>
+            <local:AppBarLockableToggleButton LockToggle="True" x:Name="SettingsBarButton" Icon="Setting" Label="Settings"/>
+        </CommandBar>
+        <StackPanel controls:DockPanel.Dock="Top" Orientation="Horizontal" Padding="10 10 0 10">
+            <Border BorderBrush="{x:Null}" Padding="10">
+                <TextBlock Text="Start at Login" VerticalAlignment="Center"/>
+            </Border>
+            <Button x:Name="StartupButton" Content="Enable" Padding="10"/>
+            <TextBlock x:Name="StartupStatus" Padding="10"/>
+        </StackPanel>
+        <StackPanel controls:DockPanel.Dock="Top" Orientation="Horizontal" Padding="10 10 0 10">
+            <Border BorderBrush="{x:Null}" Padding="10">
+                <TextBlock Text="Layout Padding" VerticalAlignment="Center"/>
+            </Border>
+            <muxc:NumberBox 
+                x:Name="LayoutPaddingNumberBox"
+                Value="{Binding LayoutPadding, Mode=TwoWay}"
+                Minimum="0"
+                Maximum="100"
+                SmallChange="1"
+                LargeChange="10"
+                SpinButtonPlacementMode="Inline"
+                Padding="10">
+            </muxc:NumberBox >
+            <Border BorderBrush="{x:Null}" Padding="50 0 10 0">
+                <TextBlock Text="Window Padding" VerticalAlignment="Center"/>
+            </Border>
+            <muxc:NumberBox 
+                x:Name="PaddingNumberBox"
+                Value="{Binding Padding, Mode=TwoWay}"
+                Minimum="0"
+                Maximum="100"
+                SmallChange="1"
+                LargeChange="10"
+                SpinButtonPlacementMode="Inline"
+                Padding="10">
+            </muxc:NumberBox >
+        </StackPanel>
+        <StackPanel controls:DockPanel.Dock="Top" Orientation="Horizontal" Padding="10 10 0 10">
+            <Border BorderBrush="{x:Null}" Padding="10">
+                <TextBlock Text="Screen Margin" Padding="0,0,50,0" VerticalAlignment="Center"/>
+            </Border>
+            <TextBlock Text="Top" Padding="0,0,10,0" VerticalAlignment="Center"/>
+            <muxc:NumberBox 
+                x:Name="MarginTopNumberBox"
+                Value="{Binding MarginTop, Mode=TwoWay}"
+                Minimum="0"
+                Maximum="100"
+                SmallChange="1"
+                LargeChange="10"
+                SpinButtonPlacementMode="Inline"
+                Padding="10">
+            </muxc:NumberBox >
+            <TextBlock Text="Bottom" Padding="50,0,10,0" VerticalAlignment="Center"/>
+            <muxc:NumberBox 
+                x:Name="MarginBottonNumberBox"
+                Value="{Binding MarginBottom, Mode=TwoWay}"
+                Minimum="0"
+                Maximum="100"
+                SmallChange="1"
+                LargeChange="10"
+                SpinButtonPlacementMode="Inline"
+                Padding="10">
+            </muxc:NumberBox >
+            <TextBlock Text="Right" Padding="50,0,10,0" VerticalAlignment="Center"/>
+            <muxc:NumberBox 
+                x:Name="MarginRightNumberBox"
+                Value="{Binding MarginRight, Mode=TwoWay}"
+                Minimum="0"
+                Maximum="100"
+                SmallChange="1"
+                LargeChange="10"
+                SpinButtonPlacementMode="Inline"
+                Padding="10">
+            </muxc:NumberBox >
+            <TextBlock Text="Left" Padding="50,0,10,0" VerticalAlignment="Center"/>
+            <muxc:NumberBox 
+                x:Name="MarginLeftNumberBox"
+                Value="{Binding MarginLeft, Mode=TwoWay}"
+                Minimum="0"
+                Maximum="100"
+                SmallChange="1"
+                LargeChange="10"
+                SpinButtonPlacementMode="Inline"
+                Padding="10">
+            </muxc:NumberBox >
+        </StackPanel>
+        <StackPanel controls:DockPanel.Dock="Top" Orientation="Vertical" Padding="10 10 0 10" Height="Auto">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="{x:Null}" Padding="10">
+                    <TextBlock Text="Filters" VerticalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Grid x:Name="FiltersListHeaders" HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="115"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{ThemeResource BaseTextBlockStyle}" Padding="0,0,10,0" Text="Application Name" />
+                    <TextBlock Grid.Column="1" Style="{ThemeResource BaseTextBlockStyle}" Padding="0,0,10,0" Text="Class Name" />
+                    <TextBlock Grid.Column="2" Style="{ThemeResource BaseTextBlockStyle}" Padding="0,0,10,0" Text="Actions" />
+                </Grid>
+                <ScrollViewer>
+                    <ListView x:Name="FilterList" ItemsSource="{Binding Filters}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Top"/>
+                                <Setter Property="Padding" Value="0,0,0,0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="115"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Style="{ThemeResource BodyTextBlockStyle}" Padding="0,0,10,0" Text="{Binding AppName}" />
+                                    <TextBlock Grid.Column="1" Style="{ThemeResource BodyTextBlockStyle}" Padding="0,0,10,0" Text="{Binding ClassName}" />
+                                    <Button Grid.Column="2" Padding="10,10,10,10" Content="Remove" Click="FilterRemoveButton_Click"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
+            </StackPanel>
+        </StackPanel>
+    </controls:DockPanel>
+</Page>
